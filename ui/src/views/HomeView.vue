@@ -4,7 +4,12 @@
           <canvas ref="canvas"></canvas>
           <div class="left-cards">
               <div class="status-card">
-                  <p class="status-text">Status: <span class="status-ok">Operational</span></p>
+                  <p class="status-text">Status:
+                      <span class="status-ok status-indicator">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="status-icon icon-tabler icon-tabler-heartbeat" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-2.896 -2.868m-6.117 -8.104a5 5 0 0 1 9.013 -3.022a5 5 0 1 1 7.5 6.572" /><path d="M3 13h2l2 3l2 -6l1 3h3" /></svg>
+                          Operational
+                      </span>
+                  </p>
                   <div class="status-details">
                       <div class="status-table db-count">
                           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /><path d="M4 6v6a8 3 0 0 0 16 0v-6" /><path d="M4 12v6a8 3 0 0 0 16 0v-6" /></svg>
@@ -64,6 +69,18 @@ export default class HomeView extends Vue {
 </script>
 
 <style>
+@keyframes glowing-status-ok {
+    0% {
+        text-shadow: none;
+    }
+    50% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #00ae4c, 0 0 40px #01a448, 0 0 50px #fff;
+    }
+    100% {
+        text-shadow: none;
+    }
+}
+
 .top-card-background:after {
     z-index: 1;
 }
@@ -102,6 +119,31 @@ export default class HomeView extends Vue {
     width: 100%;
 
     > .status-card {
+        background-color: #fdfdfdbd;
+        backdrop-filter: blur(20px);
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        width: 30%;
+        height: 60%;
+        margin: 16px;
+        text-align: left;
+
+        > .status-text {
+            font-size: 1.3em;
+            padding-left: 16px;
+
+            > .status-indicator {
+                animation: glowing-status-ok 4s infinite;
+                > .status-icon {
+                    vertical-align: top;
+                }
+            }
+
+            > .status-ok {
+                color: #00ae4c;
+            }
+        }
+
         > .status-details {
             display: flex;
             justify-content: space-around;
@@ -127,25 +169,5 @@ export default class HomeView extends Vue {
     width: 40%;
     text-align: left;
     max-width: 200px;
-}
-
-.status-card {
-    background-color: #fdfdfdbd;
-    backdrop-filter: blur(20px);
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    width: 30%;
-    height: 60%;
-    margin: 16px;
-    text-align: left;
-
-    > .status-text {
-        font-size: 1.3em;
-        padding-left: 16px;
-
-        > .status-ok {
-            color: #00ae4c;
-        }
-    }
 }
 </style>
