@@ -4,6 +4,9 @@
     <div class="beta-warning">
         <span>Dev build. Not indicative of version will be released.</span>
     </div>
+    <div class="footer">
+        <span class="footer-copyright">©2024 nexryai All rights reserved.</span>
+    </div>
 </template>
 
 <script lang="ts">
@@ -52,5 +55,17 @@ nav a.router-link-exact-active {
     color: #000;
     font-size: .8em;
     z-index: 10000;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: right;
+    width: 100%;
+}
+
+.footer-copyright {
+    font-size: .8em;
+    color: #000;
+    padding: 10px;
 }
 </style>
