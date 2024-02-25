@@ -1,6 +1,9 @@
 <template>
     <MainHeader />
     <router-view class="app-main-view"/>
+    <div class="beta-warning">
+        <span>Dev build. Not indicative of version will be released.</span>
+    </div>
 </template>
 
 <script lang="ts">
@@ -38,5 +41,16 @@ nav a.router-link-exact-active {
 
 .app-main-view {
   padding-top: 80px;
+}
+
+.beta-warning {
+    position: fixed;
+    padding: 0 10px;
+    bottom: 0;
+    left: 0;
+    background-color: #0000004f;
+    color: #000;
+    font-size: .8em;
+    z-index: 10000;
 }
 </style>

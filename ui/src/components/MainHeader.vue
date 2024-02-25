@@ -6,19 +6,37 @@
                 <span class="beta">Beta</span>
             </div>
             <div class="right-box">
-                <svg xmlns="http://www.w3.org/2000/svg" class="header-action-icon icon-tabler icon-tabler-power" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 6a7.75 7.75 0 1 0 10 0" /><path d="M12 4l0 8" /></svg>
+                <svg @click="openModal" xmlns="http://www.w3.org/2000/svg" class="header-action-icon icon-tabler icon-tabler-power" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 6a7.75 7.75 0 1 0 10 0" /><path d="M12 4l0 8" /></svg>
                 <svg xmlns="http://www.w3.org/2000/svg" class="header-action-icon icon-tabler icon-tabler-user-circle top-user-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" /></svg>
             </div>
         </nav>
     </header>
+    <ModalDialog v-if="showModal" :text="modalText" @close="closeModal"/>
 </template>
 
 <script>
+import ModalDialog from "./ModalDialog.vue"
+
 export default {
     name: "TheHeader",
+    components: {
+        ModalDialog
+    },
     data () {
         return {
-            title: "PgHarmony"
+            title: "PgHarmony",
+            showModal: false,
+            modalText: "This is a modal dialog."
+        }
+    },
+    methods: {
+        openModal () {
+            console.log("openModal")
+            this.showModal = true
+        },
+        closeModal () {
+            console.log("closeModal")
+            this.showModal = false
         }
     }
 }
