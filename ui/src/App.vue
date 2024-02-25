@@ -1,10 +1,18 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <MainHeader />
+    <router-view class="app-main-view"/>
 </template>
+
+<script lang="ts">
+import MainHeader from "@/components/MainHeader.vue"
+
+export default {
+    name: "App",
+    components: {
+        MainHeader
+    }
+}
+</script>
 
 <style>
 #app {
@@ -26,5 +34,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.app-main-view {
+  padding-top: 80px;
 }
 </style>
