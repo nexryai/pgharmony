@@ -1,0 +1,15 @@
+{
+  "name": "pgharmony",
+  "version": "0.0.1",
+  "repository": "https://github.com/nexryai/pgharmony",
+  "author": "nexryai <nexryai@sda1.net>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@vue/cli-ui": "^5.0.8"
+  },
+  "scripts": {
+    "debug": "cd ui && npm run build && cd .. && go run main.go",
+    "build": "cd ui && npm run build && cd .. && go build -o pgharmony main.go"
+  }
+}
