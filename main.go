@@ -1,60 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v3"
-	"github.com/nexryai/pgharmony/ui"
-	"net/http"
+	"github.com/nexryai/pgharmony/internal/core/config"
+	"github.com/nexryai/pgharmony/internal/core/logger"
+	"github.com/nexryai/pgharmony/internal/server"
 )
 
 func main() {
 	app := fiber.New()
+	log := logger.GetLogger("INIT")
 
-	embedFS := ui.StaticFiles
-	/*staticFS, err := fs.Sub(embedFS, "dist")
+	// ルーティング
+	server.CreateRouter(app)
+
+	err := app.Listen(fmt.Sprintf(":%s", config.Port))
 	if err != nil {
-		panic(err)
-	}*/
-
-	app.Get("/", func(ctx fiber.Ctx) error {
-		rawIndexHtml, err := embedFS.ReadFile("dist/index.html")
-		if err != nil {
-			return ctx.Status(http.StatusNotFound).SendString("Not Found")
-		}
-
-		ctx.Set("Content-Type", "text/html")
-		return ctx.Send(rawIndexHtml)
-	})
-
-	app.Get("/favicon.ico", func(ctx fiber.Ctx) error {
-		rawFaviconIco, err := embedFS.ReadFile("dist/favicon.ico")
-		if err != nil {
-			return ctx.Status(http.StatusNotFound).SendString("Not Found")
-		}
-
-		ctx.Set("Content-Type", "image/x-icon")
-		return ctx.Send(rawFaviconIco)
-	})
-
-	// /statuc/js/*.js
-	app.Get("/static/js/*", func(ctx fiber.Ctx) error {
-		rawStaticFile, err := embedFS.ReadFile("dist/static/js/" + ctx.Params("*"))
-		if err != nil {
-			return ctx.Status(http.StatusNotFound).SendString("Not Found")
-		}
-
-		ctx.Set("Content-Type", "application/javascript")
-		return ctx.Send(rawStaticFile)
-	})
-
-	app.Get("/static/css/*", func(ctx fiber.Ctx) error {
-		rawStaticFile, err := embedFS.ReadFile("dist/static/css/" + ctx.Params("*"))
-		if err != nil {
-			return ctx.Status(http.StatusNotFound).SendString("Not Found")
-		}
-
-		ctx.Set("Content-Type", "text/css")
-		return ctx.Send(rawStaticFile)
-	})
-
-	app.Listen(":3000")
+		log.FatalWithDetail("Failed to start server", err)
+	}
 }
