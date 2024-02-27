@@ -9,16 +9,6 @@ import (
 func createEmbedFsRouter(app *fiber.App) {
 	embedFS := ui.StaticFiles
 
-	app.Get("/", func(ctx fiber.Ctx) error {
-		rawIndexHtml, err := embedFS.ReadFile("dist/index.html")
-		if err != nil {
-			return ctx.Status(http.StatusNotFound).SendString("Not Found")
-		}
-
-		ctx.Set("Content-Type", "text/html")
-		return ctx.Send(rawIndexHtml)
-	})
-
 	app.Get("/favicon.ico", func(ctx fiber.Ctx) error {
 		rawFaviconIco, err := embedFS.ReadFile("dist/favicon.ico")
 		if err != nil {
@@ -47,5 +37,16 @@ func createEmbedFsRouter(app *fiber.App) {
 
 		ctx.Set("Content-Type", "text/css")
 		return ctx.Send(rawStaticFile)
+	})
+
+	// catch all
+	app.Get("/*", func(ctx fiber.Ctx) error {
+		rawIndexHtml, err := embedFS.ReadFile("dist/index.html")
+		if err != nil {
+			return ctx.Status(http.StatusNotFound).SendString("Not Found")
+		}
+
+		ctx.Set("Content-Type", "text/html")
+		return ctx.Send(rawIndexHtml)
 	})
 }
