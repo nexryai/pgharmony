@@ -31,16 +31,19 @@
               <p>RAM: 9999GB</p>
           </div>
       </div>
-      <HelloWorld msg="Welcome to PgHarmony Control Panel"/>
+        <HbHomeSection title="DB Management"/>
+        <HelloWorld msg="Welcome to PgHarmony Control Panel"/>
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
-import HelloWorld from "@/components/HelloWorld.vue" // @ is an alias to /src
+import HelloWorld from "@/components/HelloWorld.vue"
+import HbHomeSection from "@/components/core/HbHomeSection.vue"
 
 @Options({
     components: {
+        HbHomeSection,
         HelloWorld
     }
 })

@@ -12,7 +12,7 @@
         </nav>
     </header>
     <transition name="fade-modal">
-        <ModalDialog v-if="showModal" :text="modalText" @close="closeModal"/>
+        <ModalDialog v-if="showModal" :title="modalTitle" :text="modalText" :is-red-dialog=true @close="closeModal"/>
     </transition>
 </template>
 
@@ -28,12 +28,15 @@ export default {
         return {
             title: "PgHarmony",
             showModal: false,
-            modalText: "This is a modal dialog."
+            modalText: "Sorry. This message shouldn't be here.",
+            modalTitle: "Fatal Error!"
         }
     },
     methods: {
         openModal () {
             console.log("openModal")
+            this.modalText = "ToDo"
+            this.modalTitle = "Fatal Error!"
             this.showModal = true
         },
         closeModal () {

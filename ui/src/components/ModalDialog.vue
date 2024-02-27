@@ -4,18 +4,23 @@
             <div class="title-background">
                 <canvas ref="canvas"></canvas>
             </div>
-            <h2 class="modal-title-text">Modal Dialog</h2>
+            <h2 v-if="isRedDialog" class="modal-title-text modal-title-red-text">{{ title }}</h2>
+            <h2 v-else class="modal-title-text">{{ title }}</h2>
         </div>
         <div class="modal-content">
             <span class="close" @click="closeModal">&times;</span>
-            <p>{{ text }}</p> <!-- propsで受け取ったテキストを表示します -->
+            <p>{{ text }}</p>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["text"], // 親コンポーネントからテキストを受け取るためのpropsを定義します
+    props: {
+        title: String,
+        text: String,
+        isRedDialog: Boolean
+    },
     data () {
         return {
             showModal: true
@@ -27,6 +32,7 @@ export default {
         }
     },
     mounted () {
+        // modalTitleの背景を描画
         const canvas = this.$refs.canvas
         const ctx = canvas.getContext("2d")
 
@@ -39,8 +45,14 @@ export default {
             0, 0, 0, // 内側の円の中心と半径
             0, 0, Math.max(canvas.width - 10000, canvas.height - 200) // 外側の円の中心と半径
         )
-        gradient.addColorStop(0, "rgba(0, 0, 0, 0.2)")
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
+
+        if (this.isRedDialog) {
+            gradient.addColorStop(0, "rgba(255, 0, 0, 0.45)")
+            gradient.addColorStop(1, "rgba(255, 0, 0, 0)")
+        } else {
+            gradient.addColorStop(0, "rgba(0, 0, 0, 0.2)")
+            gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
+        }
 
         // グラデーションを描画
         ctx.fillStyle = gradient
@@ -53,9 +65,9 @@ export default {
                 const distance = Math.sqrt(x * x + y * y)
                 const maxDistance = Math.sqrt(200 * 200 + 200 * 200)
                 const opacity = 0.2 * (1 - distance / maxDistance)
-
                 ctx.fillStyle = `rgba(0, 0, 0, ${opacity})` // 透明度を設定
-                ctx.fillRect(x, y, 1, 1) // 1pxの点を描画
+
+                ctx.fillRect(x, y, 1.2, 1.2) // ドットを描画
             }
         }
     }
@@ -139,7 +151,12 @@ export default {
 
 .modal-title-text {
     position: absolute;
+    font-size: 1.25em;
     margin: 20px;
     z-index: 2;
+}
+
+.modal-title-red-text {
+    color: red;
 }
 </style>
