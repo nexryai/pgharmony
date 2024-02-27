@@ -12,7 +12,7 @@
         </nav>
     </header>
     <transition name="fade-modal">
-        <ModalDialog v-if="showModal" :title="modalTitle" :text="modalText" :is-red-dialog=true @close="closeModal"/>
+        <ModalDialog v-if="showModal" :title="modalTitle" :text="modalText" @close="closeModal"/>
     </transition>
 </template>
 
@@ -35,8 +35,8 @@ export default {
     methods: {
         openModal () {
             console.log("openModal")
-            this.modalText = "ToDo"
-            this.modalTitle = "Fatal Error!"
+            this.modalText = "©️2024 nexryai All rights reserved."
+            this.modalTitle = "Copyright"
             this.showModal = true
         },
         closeModal () {

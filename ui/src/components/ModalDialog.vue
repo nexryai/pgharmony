@@ -7,8 +7,10 @@
             <h2 v-if="isRedDialog" class="modal-title-text modal-title-red-text">{{ title }}</h2>
             <h2 v-else class="modal-title-text">{{ title }}</h2>
         </div>
+        <span class="close" @click="closeModal">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+        </span>
         <div class="modal-content">
-            <span class="close" @click="closeModal">&times;</span>
             <p>{{ text }}</p>
         </div>
     </div>
@@ -127,6 +129,8 @@ export default {
 }
 
 .close {
+    position: absolute;
+    right: 32px;
     color: #aaa;
     float: right;
     font-size: 28px;
