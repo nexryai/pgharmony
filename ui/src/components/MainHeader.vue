@@ -44,15 +44,7 @@ export default {
 }
 </script>
 
-<style>
-.fade-modal-enter-active, .fade-modal-leave-active {
-    transition: opacity 0.2s, background-color 0.2s !important;
-}
-.fade-modal-enter-from, .fade-modal-leave-to {
-    opacity: 0;
-    background-color: rgba(225, 225, 225, 0);
-}
-
+<style scoped>
 .navbar {
     padding: 10px 10px 17px 10px;
     text-align: left;
@@ -61,37 +53,43 @@ export default {
     border-bottom: 1px solid #eaeaea;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     background-color: #ffffff54;
     backdrop-filter: blur(18px);
     z-index: 1000;
 }
 
-.page-title {
-    font-size: 1.5em;
-    color: #4a4a4a;
-}
+.left-box {
+    margin: 5px 0 0 6px;
 
-.beta {
-    font-size: 0.8em;
-    color: #f8f9fa;
-    background-color: #007bff;
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
-    margin-left: 10px;
+    > .page-title {
+        font-size: 1.5em;
+        color: #4a4a4a;
+    }
+
+    > .beta {
+        font-size: 0.8em;
+        color: #f8f9fa;
+        background-color: #007bff;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
+        margin-left: 10px;
+    }
 }
 
 .right-box {
     margin-right: 32px;
+
+    > .top-user-icon {
+        margin-top: 8px;
+        margin-left: 19px;
+    }
+
+    > .header-action-icon:hover {
+        cursor: pointer;
+        color: #007bff;
+    }
 }
 
-.top-user-icon {
-    margin-top: 8px;
-    margin-left: 19px;
-}
-
-.header-action-icon:hover {
-    cursor: pointer;
-    color: #007bff;
-}
 </style>

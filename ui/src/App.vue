@@ -68,4 +68,12 @@ nav a.router-link-exact-active {
     color: #000;
     padding: 10px;
 }
+
+.fade-modal-enter-active, .fade-modal-leave-active {
+    transition: opacity 0.2s, background-color 0.2s !important;
+}
+.fade-modal-enter-from, .fade-modal-leave-to {
+    opacity: 0;
+    background-color: rgba(225, 225, 225, 0);
+}
 </style>
