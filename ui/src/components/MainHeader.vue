@@ -11,7 +11,9 @@
             </div>
         </nav>
     </header>
-    <ModalDialog v-if="showModal" :text="modalText" @close="closeModal"/>
+    <transition name="fade-modal">
+        <ModalDialog v-if="showModal" :text="modalText" @close="closeModal"/>
+    </transition>
 </template>
 
 <script>
@@ -43,6 +45,14 @@ export default {
 </script>
 
 <style>
+.fade-modal-enter-active, .fade-modal-leave-active {
+    transition: opacity 0.2s, background-color 0.2s !important;
+}
+.fade-modal-enter-from, .fade-modal-leave-to {
+    opacity: 0;
+    background-color: rgba(225, 225, 225, 0);
+}
+
 .navbar {
     padding: 10px 10px 17px 10px;
     text-align: left;

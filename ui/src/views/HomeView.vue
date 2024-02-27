@@ -28,7 +28,7 @@
           </div>
           <div class="right-cards">
               <p>CPU: 100%</p>
-              <p>MEMORY: 9999GB</p>
+              <p>RAM: 9999GB</p>
           </div>
       </div>
       <HelloWorld msg="Welcome to PgHarmony Control Panel"/>

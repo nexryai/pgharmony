@@ -1,18 +1,16 @@
 <template>
-    <transition name="fade">
-        <div v-if="showModal" class="modal">
-            <div class="modal-title-box">
-                <div class="title-background">
-                    <canvas ref="canvas"></canvas>
-                </div>
-                <h2 class="modal-title-text">Modal Dialog</h2>
+    <div v-if="showModal" class="modal">
+        <div class="modal-title-box">
+            <div class="title-background">
+                <canvas ref="canvas"></canvas>
             </div>
-            <div class="modal-content">
-                <span class="close" @click="closeModal">&times;</span>
-                <p>{{ text }}</p> <!-- propsで受け取ったテキストを表示します -->
-            </div>
+            <h2 class="modal-title-text">Modal Dialog</h2>
         </div>
-    </transition>
+        <div class="modal-content">
+            <span class="close" @click="closeModal">&times;</span>
+            <p>{{ text }}</p> <!-- propsで受け取ったテキストを表示します -->
+        </div>
+    </div>
 </template>
 
 <script>
@@ -64,7 +62,29 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.fade-modal-enter-active, .fade-modal-leave-active {
+    > .modal {
+        transition: opacity 0.2s, background-color 0.2s !important;
+    }
+
+    > .modal-content {
+        transition: opacity 0.2s, transform 0.2s !important;
+    }
+}
+.fade-modal-enter-from, .fade-modal-leave-to {
+    > .modal {
+        opacity: 0;
+        background-color: rgba(225, 225, 225, 0);
+    }
+
+    > .modal-content {
+        pointer-events: none;
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
 .modal {
     display: block;
     position: fixed;
@@ -121,12 +141,5 @@ export default {
     position: absolute;
     margin: 20px;
     z-index: 2;
-}
-
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-    opacity: 0;
 }
 </style>
