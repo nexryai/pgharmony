@@ -4,8 +4,14 @@
             <div class="title-background">
                 <canvas ref="canvas"></canvas>
             </div>
-            <h2 v-if="isRedDialog" class="modal-title-text modal-title-red-text">{{ title }}</h2>
-            <h2 v-else class="modal-title-text">{{ title }}</h2>
+            <h2 v-if="isRedDialog" class="modal-title-text modal-title-red-text">
+                <HbRenderIcon :icon="titleIcon" class="modal-title-icon modal-title-red-icon"/>
+                {{ title }}
+            </h2>
+            <h2 v-else class="modal-title-text">
+                <HbRenderIcon :icon="titleIcon" class="modal-title-icon"/>
+                {{ title }}
+            </h2>
         </div>
         <span class="close" @click="closeModal">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
@@ -17,9 +23,16 @@
 </template>
 
 <script>
+import HbRenderIcon from "@/components/core/HbRenderIcon.vue"
+import { IconType } from "@/types/IconType"
+
 export default {
+    components: {
+        HbRenderIcon
+    },
     props: {
         title: String,
+        titleIcon: IconType,
         text: String,
         isRedDialog: Boolean
     },
@@ -116,10 +129,27 @@ export default {
     text-align: left;
     margin: 15px;
     display: flex;
-}
 
-.modal-title-text {
-    font-size: 14px;
+    > .modal-title-text {
+        position: absolute;
+        font-size: 1.25em;
+        margin: 20px;
+        z-index: 2;
+
+        > .modal-title-icon {
+            width: auto;
+            height: 28px;
+            vertical-align: top;
+        }
+    }
+
+    > .modal-title-red-text {
+        color: red;
+
+        > .modal-title-red-icon {
+            fill: red;
+        }
+    }
 }
 
 .modal-content {
@@ -151,16 +181,5 @@ export default {
     z-index: 1;
     height: 400px;
     width: 300px;
-}
-
-.modal-title-text {
-    position: absolute;
-    font-size: 1.25em;
-    margin: 20px;
-    z-index: 2;
-}
-
-.modal-title-red-text {
-    color: red;
 }
 </style>
