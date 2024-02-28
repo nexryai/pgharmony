@@ -4,20 +4,20 @@
             <div class="title-background">
                 <canvas ref="canvas"></canvas>
             </div>
-            <h2 v-if="isRedDialog" class="modal-title-text modal-title-red-text">
+            <span v-if="isRedDialog" class="modal-title-text modal-title-red-text">
                 <HbRenderIcon :icon="titleIcon" class="modal-title-icon modal-title-red-icon"/>
                 {{ title }}
-            </h2>
-            <h2 v-else class="modal-title-text">
+            </span>
+            <span v-else class="modal-title-text">
                 <HbRenderIcon :icon="titleIcon" class="modal-title-icon"/>
                 {{ title }}
-            </h2>
+            </span>
         </div>
         <span class="close" @click="closeModal">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
         </span>
         <div class="modal-content">
-            <p>{{ text }}</p>
+            <p class="dialog-text">{{ text }}</p>
         </div>
     </div>
 </template>
@@ -133,6 +133,7 @@ export default {
     > .modal-title-text {
         position: absolute;
         font-size: 1.25em;
+        font-weight: bold;
         margin: 20px;
         z-index: 2;
 
@@ -156,6 +157,10 @@ export default {
     margin: 15% auto;
     padding: 20px;
     width: 80%;
+
+    > .dialog-text {
+        white-space: pre-wrap;
+    }
 }
 
 .close {

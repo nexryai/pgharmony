@@ -12,7 +12,7 @@
         </nav>
     </header>
     <transition name="fade-modal">
-        <ModalDialog v-if="showModal" :title="modalTitle" :text="modalText" :title-icon="IconType.Save" @close="closeModal"/>
+        <ModalDialog v-if="showModal" :title="modalTitle" :text="modalText" :title-icon="IconType.License" @close="closeModal"/>
     </transition>
 </template>
 
@@ -40,9 +40,10 @@ export default {
     },
     methods: {
         openModal () {
-            console.log("openModal")
-            this.modalText = "©️2024 nexryai All rights reserved."
-            this.modalTitle = "Copyright"
+            this.modalText = "©️2024 nexryai All rights reserved.\n\n" +
+                "This software is licensed under the MIT License.\n" +
+                "This software also uses some third party open source software. Please see GitHub for details."
+            this.modalTitle = "Legal Notice"
             this.showModal = true
         },
         showTodo () {
